@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     
     var randomBallIndex : Int = 0
     
+    let answerArray = ["ball1", "ball2", "ball3", "ball4", "ball5"]
+    
     @IBOutlet weak var ballIAnswerImage: UIImageView!
     
     override func viewDidLoad() {
@@ -20,10 +22,18 @@ class ViewController: UIViewController {
     }
 
     @IBAction func pushedAnswerButton(_ sender: UIButton) {
+        updateAnswer()
+    }
+    func updateAnswer(){
         randomBallIndex = Int(arc4random_uniform(5))
+        
         print(randomBallIndex)
         
+        ballIAnswerImage.image = UIImage(named: answerArray[randomBallIndex])
     }
     
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?){
+        updateAnswer()
+    }
 }
 
